@@ -14,7 +14,7 @@ public class ChatController {
     private final MessageService messageService;
 
     // /app/chat.sendMessage 로 들어오는 메시지를 처리하여 /topic/public 로 전송
-    @MessageMapping("/chat.sendMessage")
+    @MessageMapping("/chat.sendMessage") // app 으로 온 요청을 여기서 받아서 sendTo로 topic으로 publish한다
     @SendTo("/topic/public")
     public ChatMessage sendMessage(ChatMessage chatMessage) {
         return chatMessage;

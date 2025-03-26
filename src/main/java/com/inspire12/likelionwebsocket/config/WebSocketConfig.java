@@ -21,9 +21,9 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
     @Override
     public void configureMessageBroker(MessageBrokerRegistry config) {
         // 클라이언트가 구독할 prefix 설정 (예: /topic)
-        config.enableSimpleBroker("/topic");
+        config.enableSimpleBroker("/topic"); //심플브로커 허용(활성화) topic으로
         // 클라이언트가 메시지를 보낼 때 사용하는 prefix 설정 (예: /app)
-        config.setApplicationDestinationPrefixes("/app");
+        config.setApplicationDestinationPrefixes("/app"); //app으로 보내면 서버에서 메세지 수정, 새롭게 생성 등 작업을 하고 다시 심플브로커에게 topic으로 보내서 클라이언트가 볼 수 있게된다.
     }
 
     @Override
@@ -32,7 +32,7 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
         registry.addEndpoint("/ws")
                 .setAllowedOrigins("http://localhost:3000") // 클라이언트 주소 허용
 //                .setAllowedOrigins("*")
-                .withSockJS();
+                .withSockJS(); //sockJS는 websocket 연결을 처리해주는 라이브러리
     }
 
     @Override

@@ -1,0 +1,8 @@
+POST http://localhost:8083/broadcast
+Content-Type: application/json
+
+{
+  "type": "CHAT",
+  "content": "broadcast test",
+  "sender": "admin"
+}
