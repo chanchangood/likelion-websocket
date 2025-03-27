@@ -6,6 +6,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @RequiredArgsConstructor
 @Controller
@@ -25,5 +28,11 @@ public class ChatController {
     @SendTo("/topic/public")
     public ChatMessage addUser(ChatMessage chatMessage) {
         return messageService.createWelcomeMessage(chatMessage);
+    }
+
+    @MessageMapping("/chat.sendPrivateMessage")
+    @SendTo("/user/queue/private")
+    public ChatMessage callUser(@RequestParam String username, @RequestBody ChatMessage chatMessage) {
+        return messageService.callUser(username, chatMessage);
     }
 }
