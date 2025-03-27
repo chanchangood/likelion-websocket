@@ -1,0 +1,8 @@
+POST http://localhost:8083/call/user?username=kim
+Content-Type: application/json
+
+{
+  "type": "CHAT",
+  "content": "귓속말 테스트",
+  "sender": "admin"
+}
