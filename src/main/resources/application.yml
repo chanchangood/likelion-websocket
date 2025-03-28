@@ -10,7 +10,7 @@ spring:
     port: 5672      #default port
   ai:
     openai:
-      api-key: ${OPEN_AI_KEY}
+      api-key: ${OPEN_AI_KEY:inspire12}
       chat:
         options:
           model: gpt-4.5-turbo
