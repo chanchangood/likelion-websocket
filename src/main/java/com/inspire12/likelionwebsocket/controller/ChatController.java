@@ -21,11 +21,10 @@ public class ChatController {
     }
 
     // /app/chat.addUser 로 들어오는 메시지를 처리하여 /topic/public 로 전송
-    @MessageMapping("/chat.addUser")
-    @SendTo("/topic/public")
-    public ChatMessage addUser(ChatMessage chatMessage) {
-//        return stompMessagingService.createWelcomeMessage(chatMessage);
-        return chatMessage;
-    }
+//    @MessageMapping("/chat.addUser")
+//    @SendTo("/topic/public")
+//    public ChatMessage addUser(ChatMessage chatMessage) {
+//        return chatMessage;
+//    }
 
 }

@@ -3,6 +3,7 @@ package com.inspire12.likelionwebsocket.handshake;
 import org.springframework.http.server.ServerHttpRequest;
 import org.springframework.stereotype.Component;
 import org.springframework.web.socket.WebSocketHandler;
+import org.springframework.web.socket.server.HandshakeHandler;
 import org.springframework.web.socket.server.support.DefaultHandshakeHandler;
 
 import java.nio.file.attribute.UserPrincipal;
@@ -12,13 +13,22 @@ import java.util.Map;
 import java.util.UUID;
 
 @Component
-public class CustomHandshakeHandler {
+public class CustomHandshakeHandler extends DefaultHandshakeHandler {
+
+    @Override
+    protected Principal determineUser(ServerHttpRequest request, WebSocketHandler handler,
+        Map<String, Object> attributes) {
+
+        String username = getTokenFromRequest(request);
+        return () -> username;
+        //validateToken(), extractUsernameFromToken() 생략
+    }
 
     private String getTokenFromRequest(ServerHttpRequest request) {
         // URL 파라미터에서 토큰 추출
         String query = request.getURI().getQuery();
-        if (query != null && query.contains("token=")) {
-            return query.split("token=")[1];
+        if (query != null && query.contains("username=")) {
+            return query.split("username=")[1];
         }
         return null;
     }
